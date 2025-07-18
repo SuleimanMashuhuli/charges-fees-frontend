@@ -1,11 +1,12 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
+import ContainerLayOut from './components/ContainerLayOut';
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
+      <ContainerLayOut />
     </BrowserRouter>
   );
 }
 
-export default App;
