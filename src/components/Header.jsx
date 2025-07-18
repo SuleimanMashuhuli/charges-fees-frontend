@@ -20,6 +20,7 @@ export default function Header() {
                 </a>
             </div>
             
+
             <marquee className="flex-1 text-gray-900 font-medium">
                 ⚠️ Ensure all charge requests are reviewed carefully before approved.
             </marquee>

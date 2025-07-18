@@ -19,7 +19,7 @@ export default function ContainerLayOut() {
                 <Routes>
                     <Route path="/" element={<AsideLayout />} >
                         <Route path="pending" element={<PendingCharges />} />
-                        <Route path="view" element={<ViewCharges />} />
+                        <Route path="request/:id" element={<ViewCharges />} />
                         <Route path="approved" element={<ApprovedCharges />} />
                     </Route>
                 </Routes>
