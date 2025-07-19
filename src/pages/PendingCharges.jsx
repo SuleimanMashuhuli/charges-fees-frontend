@@ -11,6 +11,76 @@ export default function PendingCharges() {
         max_amount: 10000,
         abc_charge: 50,
         vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },{
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },{
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
+    },
+    {
+        id: 1,
+        channel_id: "ITRS00147",
+        currency: "KES",
+        max_amount: 10000,
+        abc_charge: 50,
+        vendor_charge: 30,
     }
 ]);
     const navigate = useNavigate();
@@ -78,7 +148,7 @@ export default function PendingCharges() {
                                 {requests.vendor_charge}
                             </td>
                             <td className="px-6 py-2">
-                                <button onClick={() => handleViewCharges(requests.id)} className="px-2 py-1 font-mono text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
+                                <button onClick={() => handleViewCharges(requests.id)} className="text-[14px] px-2 font-normal text-white bg-[#C70039] rounded-md hover:bg-[#FF0000] focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
                                         Approve
                                 </button>
                             </td>

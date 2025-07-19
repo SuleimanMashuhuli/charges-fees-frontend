@@ -14,7 +14,7 @@ export default function Aside() {
                 <Link to="pending" className="block p-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-300">
                     Pending Charges
                 </Link>
-                <Link to="" className="block p-2 mt-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-300">
+                <Link to="approved" className="block p-2 mt-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-300">
                     Approved Charges
                 </Link>
             </div>
