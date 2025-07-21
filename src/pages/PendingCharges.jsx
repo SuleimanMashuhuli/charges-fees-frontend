@@ -94,7 +94,7 @@ export default function PendingCharges() {
                 setRequest(response.data);
             } catch (error) {
                 console.log(error?.response?.data);
-                console.log("Not able to fetch the reqested chargesa");
+                console.log("Not able to fetch the reqested charges");
             }
         }
         getCharges()

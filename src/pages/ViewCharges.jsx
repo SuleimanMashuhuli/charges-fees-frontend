@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import SuccessAlert from "../components/alerts/SuccessAlert";
 
@@ -19,7 +19,6 @@ export default function ViewCharges() {
         setLoading(true);
         setError(null);
         try {
-            
             await axios.post(`URL${requestData.id}`);
             setApproved(true);
         } catch (err) {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 export default function Subinfo() {
     const [currency, setCurrency] = useState("");
@@ -14,19 +15,14 @@ export default function Subinfo() {
         setError(null);
         setSuccess(false);
         try {
-            const response = await fetch(`###URL#####`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ currency, amount, channel }),
+            await axios.post("###URL#####", {
+                currency,
+                amount,
+                channel
             });
-            if (!response.ok) {
-                throw new Error("Failed to submit data");
-            }
             setSuccess(true);
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.message || err.message || "Failed to submit data");
         } finally {
             setLoading(false);
         }

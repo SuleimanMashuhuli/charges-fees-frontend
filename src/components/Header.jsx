@@ -19,6 +19,7 @@ export default function Header() {
                     <span className="text-base md:text-lg font-semibold">ABC Bank Group Ltd.</span>
                 </a>
             </div>
+            {/*eslint-disable-next-line*/} 
             <marquee className="flex-1 text-gray-900 font-medium w-full md:w-auto text-center md:text-left">
                 ⚠️ Ensure all charge requests are reviewed carefully before approved.
             </marquee>
