@@ -15,7 +15,7 @@ export default function Subinfo() {
         setError(null);
         setSuccess(false);
         try {
-            await axios.post("###URL#####", {
+            await axios.post(`${process.env.REACT_APP_BASE_URL}###ENDPOINTS#####`, {
                 currency,
                 amount,
                 channel

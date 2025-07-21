@@ -90,7 +90,7 @@ export default function PendingCharges() {
     useEffect(() => {
         const getCharges = async () => {
             try {
-                const response = await axios.get('');
+                const response = await axios.get(`${process.env.RECT_APP_BASE_URL}####ENDPOINTS####`);
                 setRequest(response.data);
             } catch (error) {
                 console.log(error?.response?.data);

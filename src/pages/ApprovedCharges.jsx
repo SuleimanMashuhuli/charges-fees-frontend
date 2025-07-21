@@ -11,7 +11,7 @@ export default function ApprovedCharges () {
     useEffect(() => {
         const getApprovedCharges = async () => {
             try {
-                const response = await axios.get('####URL#######');
+                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}####ENDPOINTS#######`);
                 setRequest(response.data);
             } catch (err) {
                 setError("Failed to fetch approved charges.");

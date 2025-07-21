@@ -19,7 +19,7 @@ export default function ViewCharges() {
         setLoading(true);
         setError(null);
         try {
-            await axios.post(`URL${requestData.id}`);
+            await axios.post(`${process.env.REACT_APP_BASE_URL}######${requestData.id}####`);
             setApproved(true);
         } catch (err) {
             setError("Failed to approve request.");
