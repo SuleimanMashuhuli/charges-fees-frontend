@@ -14,7 +14,7 @@ export default function Subinfo() {
         setError(null);
         setSuccess(false);
         try {
-            const response = await fetch("/api/submit", {
+            const response = await fetch(`###URL#####`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

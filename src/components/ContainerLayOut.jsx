@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "./Header";
 import Subinfo from "./SubInfo";
 import AsideLayout from "./AsideLayout";
@@ -19,6 +19,7 @@ export default function ContainerLayOut() {
                 <div className="h-full">
                     <Routes>
                         <Route path="/" element={<AsideLayout />} >
+                            <Route index element={<Navigate to="pending" replace />} />
                             <Route path="pending" element={<PendingCharges />} />
                             <Route path="request/:id" element={<ViewCharges />} />
                             <Route path="approved" element={<ApprovedCharges />} />
