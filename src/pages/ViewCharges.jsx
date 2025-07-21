@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import SuccessAlert from "../components/alerts/SuccessAlert";
 
 export default function ViewCharges() {
     const [requestData, setrequestData] = useState("");
@@ -96,7 +97,7 @@ export default function ViewCharges() {
                         {loading ? "Approving..." : approved ? "Approved" : "Approve"}
                     </button>
                     {error && <div className="text-red-500 mt-2">{error}</div>}
-                    {approved && <div className="text-green-500 mt-2">Request approved successfully!</div>}
+                    {approved && <SuccessAlert message="Request approved successfully!" />}
                 </div>
             </form>
         </div>
