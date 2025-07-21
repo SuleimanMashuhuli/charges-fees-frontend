@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function ViewCharges() {
-    const [requestData, setrequestData] = useState('');
+    const [requestData, setrequestData] = useState("");
+    const [approved, setApproved] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -9,10 +13,20 @@ export default function ViewCharges() {
         setrequestData(requestData => ({...requestData, [name] : value }));
     }
 
-    const handleSubmit = (e) => {
-        e.prventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+        try {
+            
+            await axios.post(`URL${requestData.id}`);
+            setApproved(true);
+        } catch (err) {
+            setError("Failed to approve request.");
+        } finally {
+            setLoading(false);
+        }
     }
-
 
     return (
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,6 +41,7 @@ export default function ViewCharges() {
                             value={requestData.channel_id}
                             onChange={handleChange}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:border-[#2a3d8c]"
+                            readOnly
                         />
                     </div>
                     <div className="mb-3 ">
@@ -37,6 +52,7 @@ export default function ViewCharges() {
                             value={requestData.currency}
                             onChange={handleChange}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:border-[#2a3d8c]"
+                            readOnly
                         />
                     </div>
                     <div className="mb-3 ">
@@ -47,6 +63,7 @@ export default function ViewCharges() {
                             value={requestData.max_amount}
                             onChange={handleChange}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:border-[#2a3d8c]"
+                            readOnly
                         />
                     </div>
                     <div className="mb-3 ">
@@ -57,6 +74,7 @@ export default function ViewCharges() {
                             value={requestData.abc_charge}
                             onChange={handleChange}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:border-[#2a3d8c]"
+                            readOnly
                         />
                     </div>
                     <div className="mb-3 ">
@@ -67,14 +85,18 @@ export default function ViewCharges() {
                             value={requestData.vendor_charge}
                             onChange={handleChange}
                             className="w-full px-2 py-1 border rounded-md focus:outline-none focus:border-[#2a3d8c]"
+                            readOnly
                         />
                     </div>
                     <button
-                        className="mb-4 col-span-2 w-full py-2 bg-[#008000] text-white rounded-md hover:bg-[#228B22] mt-5"
+                        className="mb-4 col-span-2 w-full py-2 bg-[#008000] text-white rounded-md hover:bg-[#228B22] mt-5 disabled:opacity-50"
                         type="submit"
+                        disabled={approved || loading}
                     >
-                        Approve
+                        {loading ? "Approving..." : approved ? "Approved" : "Approve"}
                     </button>
+                    {error && <div className="text-red-500 mt-2">{error}</div>}
+                    {approved && <div className="text-green-500 mt-2">Request approved successfully!</div>}
                 </div>
             </form>
         </div>
