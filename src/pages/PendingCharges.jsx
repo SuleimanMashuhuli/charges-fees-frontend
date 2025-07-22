@@ -1,100 +1,28 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Alert from "../components/alerts/Alert";
+import Loading from "../components/alerts/Loading";
 
 export default function PendingCharges() {
-    const [request, setRequest] = useState([
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },{
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },{
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        },
-        {
-            id: 1,
-            channel_id: "ITRS00147",
-            currency: "KES",
-            max_amount: 10000,
-            abc_charge: 50,
-            vendor_charge: 30,
-        }
-    ]);
+    const [request, setRequest] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const getCharges = async () => {
+            setLoading(true);
+            setError(null);
             try {
-                const response = await axios.get(`${process.env.RECT_APP_BASE_URL}####ENDPOINTS####`);
+                const response = await axios.get(`##################################`);
                 setRequest(response.data);
             } catch (error) {
-                console.log(error?.response?.data);
-                console.log("Not able to fetch the reqested charges");
+                setError("Failed to fetch pending charges.");
+            } finally {
+                setLoading(false);
             }
         }
         getCharges()
@@ -127,6 +55,8 @@ export default function PendingCharges() {
 
     return (
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
+            {error && <Alert message={error} type="error" />}
+            {loading && <Loading />}
             <div className="flex items-center justify-between mb-2 mt-4">
                 <label className="flex items-center text-sm">
                     Show
@@ -134,6 +64,7 @@ export default function PendingCharges() {
                         className="mx-2 border rounded px-2 py-1"
                         value={rowsPerPage}
                         onChange={handleRowsPerPageChange}
+                        disabled={loading}
                     >
                         {[5, 10, 20, 50].map((num) => (
                             <option key={num} value={num}>{num}</option>
@@ -145,6 +76,7 @@ export default function PendingCharges() {
                     Showing {startIdx + 1}-{Math.min(endIdx, totalRows)} of {totalRows} entries
                 </span>
             </div>
+            <div className="overflow-x-auto">
             <table className="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -157,7 +89,11 @@ export default function PendingCharges() {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentRows.map((requests) => (
+                    {loading ? (
+                        <tr><td colSpan={6} className="text-center py-4">Loading...</td></tr>
+                    ) : currentRows.length === 0 ? (
+                        <tr><td colSpan={6} className="text-center py-4">No pending charges found.</td></tr>
+                    ) : currentRows.map((requests) => (
                         <tr className="bg-white border-b" key={requests.id}>
                             <td className="px-6 py-2">{requests.channel_id}</td>
                             <td className="px-6 py-2">{requests.currency}</td>
@@ -165,7 +101,7 @@ export default function PendingCharges() {
                             <td className="px-6 py-2">{requests.abc_charge}</td>
                             <td className="px-6 py-2">{requests.vendor_charge}</td>
                             <td className="px-6 py-2">
-                                <button onClick={() => handleViewCharges(requests.id)} className="text-[14px] px-2 font-normal text-white bg-[#C70039] rounded-md hover:bg-[#FF0000] focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
+                                <button onClick={() => handleViewCharges(requests.id)} className="text-[14px] px-2 font-normal text-white bg-[#C70039] rounded-md hover:bg-[#FF0000] focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out" disabled={loading}>
                                     Approve
                                 </button>
                             </td>
@@ -173,11 +109,11 @@ export default function PendingCharges() {
                     ))}
                 </tbody>
             </table>
-            
+            </div>
             <div className="flex items-center mt-4">
                 <button
                     onClick={handlePrevPage}
-                    disabled={currentPage === 1}
+                    disabled={currentPage === 1 || loading}
                     className="px-3 py-1 rounded border mr-2 disabled:opacity-50"
                 >
                     Prev
@@ -188,6 +124,7 @@ export default function PendingCharges() {
                             key={page}
                             onClick={() => handlePageClick(page)}
                             className={`px-3 py-1 rounded border ${currentPage === page ? 'bg-[#2a3d8c] text-white' : ''}`}
+                            disabled={loading}
                         >
                             {page}
                         </button>
@@ -195,7 +132,7 @@ export default function PendingCharges() {
                 </div>
                 <button
                     onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
+                    disabled={currentPage === totalPages || loading}
                     className="px-3 py-1 rounded border ml-2 disabled:opacity-50"
                 >
                     Next

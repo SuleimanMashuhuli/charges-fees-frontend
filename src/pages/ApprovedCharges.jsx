@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Alert from "../components/alerts/Alert";
+import Loading from "../components/alerts/Loading";
 import axios from "axios";
 
 export default function ApprovedCharges () {
@@ -7,14 +8,20 @@ export default function ApprovedCharges () {
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getApprovedCharges = async () => {
+            setLoading(true);
+            setError(null);
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BASE_URL}####ENDPOINTS#######`);
+              const response = await axios.get(`${process.env.REACT_APP_BASE_URL}####ENDPOINTS#######`);
                 setRequest(response.data);
+                setRequest([]);
             } catch (err) {
                 setError("Failed to fetch approved charges.");
+            } finally {
+                setLoading(false);
             }
         };
         getApprovedCharges();
@@ -43,6 +50,7 @@ export default function ApprovedCharges () {
     return (
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
             {error && <Alert message={error} type="error" />}
+            {loading && <Loading />}
             <div className="flex items-center justify-between mb-2 mt-4">
                 <label className="flex items-center text-sm">
                     Show
@@ -50,6 +58,7 @@ export default function ApprovedCharges () {
                         className="mx-2 border rounded px-2 py-1"
                         value={rowsPerPage}
                         onChange={handleRowsPerPageChange}
+                        disabled={loading}
                     >
                         {[5, 10, 20, 50].map((num) => (
                             <option key={num} value={num}>{num}</option>
@@ -61,6 +70,7 @@ export default function ApprovedCharges () {
                     Showing {totalRows === 0 ? 0 : startIdx + 1}-{Math.min(endIdx, totalRows)} of {totalRows} entries
                 </span>
             </div>
+            <div className="overflow-x-auto">
             <table className="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -73,7 +83,9 @@ export default function ApprovedCharges () {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentRows.length === 0 ? (
+                    {loading ? (
+                        <tr><td colSpan={6} className="text-center py-4">Loading...</td></tr>
+                    ) : currentRows.length === 0 ? (
                         <tr><td colSpan={6} className="text-center py-4">No approved charges found.</td></tr>
                     ) : currentRows.map((requests) => (
                         <tr className="bg-white border-b" key={requests.id}>
@@ -89,10 +101,11 @@ export default function ApprovedCharges () {
                     ))}
                 </tbody>
             </table>
+            </div>
             <div className="flex items-center mt-4">
                 <button
                     onClick={handlePrevPage}
-                    disabled={currentPage === 1}
+                    disabled={currentPage === 1 || loading}
                     className="px-3 py-1 rounded border mr-2 disabled:opacity-50"
                 >
                     Prev
@@ -103,6 +116,7 @@ export default function ApprovedCharges () {
                             key={page}
                             onClick={() => handlePageClick(page)}
                             className={`px-3 py-1 rounded border ${currentPage === page ? 'bg-[#2a3d8c] text-white' : ''}`}
+                            disabled={loading}
                         >
                             {page}
                         </button>
@@ -110,7 +124,7 @@ export default function ApprovedCharges () {
                 </div>
                 <button
                     onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
+                    disabled={currentPage === totalPages || loading}
                     className="px-3 py-1 rounded border ml-2 disabled:opacity-50"
                 >
                     Next

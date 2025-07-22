@@ -2,15 +2,15 @@ import Keycloak from "keycloak-js";
 
 
 const kc = new Keycloak({
-    realm: "MY REALM APP",
-    url: "KEYCLOAK SERVER URL",
-    clientID: "MY CLIENT ID"
+    realm: "process.env.REACT_APP_REALM",
+    url: "process.env.REACT_APP_KEYCLOAK_SERVER",
+    clientID: "process.env.REACT_APP_CLIENT_ID"
 })
 
 const initializeKeycloak = (onAuthenicated) => {
     kc.init({
         onLoad: 'login-required',
-        silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
+        silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
     })
     .then((authenticated) => {
         if (authenticated) {
@@ -38,7 +38,7 @@ const loggedUser = () => {
 const refreshToken = (successCallback) => {
     return kc.updateToken(10)
         .then(successCallback)
-        .catch(makeLogin);
+        .catch(getIn);
 };
 
 const getName = () => {
