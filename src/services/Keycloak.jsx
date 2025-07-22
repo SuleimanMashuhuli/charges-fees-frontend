@@ -1,6 +1,6 @@
 import Keycloak from "keycloak-js";
 
-// === KEYCLOAK INSTANCE ====
+
 const kc = new Keycloak({
     realm: "MY REALM APP",
     url: "KEYCLOAK SERVER URL",
@@ -11,20 +11,19 @@ const initializeKeycloak = (onAuthenicated) => {
     kc.init({
         onLoad: 'login-required',
         silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
-
     })
-        .then((authenticated) => {
-            if (authenticated) {
-                if (onAuthenicated)
-                    onAuthenicated();
-            }
-            else {
-                console.log("Please SIgn In again")
-            }
-        });
+    .then((authenticated) => {
+        if (authenticated) {
+            if (onAuthenicated)
+                onAuthenicated();
+        }
+        else {
+            console.log("Please SIgn In again")
+        }
+    });
 };
 
-const makeLogin = () => {
+const getIn = () => {
     return kc.login();
 };
 
@@ -42,7 +41,7 @@ const refreshToken = (successCallback) => {
         .catch(makeLogin);
 };
 
-const name = () => {
+const getName = () => {
     return kc.idTokenParsed?.name;
 };
 
@@ -55,11 +54,11 @@ const getOut = () => {
 };
 const KeycloakServices = {
     initializeKeycloak,
-    makeLogin,
+    getIn,
     getToken,
     loggedUser,
     refreshToken,
-    name,
+    getName,
     getUsername,
     getOut
 };
