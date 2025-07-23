@@ -7,7 +7,7 @@ const kc = new Keycloak({
     clientID: "process.env.REACT_APP_CLIENT_ID"
 })
 
-const initializeKeycloak = (onAuthenicated) => {
+const initKeycloak = (onAuthenicated) => {
     kc.init({
         onLoad: 'login-required',
         silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
@@ -49,17 +49,22 @@ const getUsername = () => {
     return kc.tokenParsed?.preferred_username;
 };
 
+const hasRole = (role) => {
+    return kc.tokenParsed?.realm_access?.roles?.includes(role) ?? false;
+}
+
 const getOut = () => {
     return kc.logout();
 };
 const KeycloakServices = {
-    initializeKeycloak,
+    initKeycloak,
     getIn,
     getToken,
     loggedUser,
     refreshToken,
     getName,
     getUsername,
+    hasRole,
     getOut
 };
 

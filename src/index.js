@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import KeycloakServices from './services/Keycloak';
+import KeycloakUserProvider from './context/KeycloakUserContext';
 
-KeycloakServices.initializeKeycloak(() => {
+KeycloakServices.initKeycloak(() => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
     <React.StrictMode>
-      <App />
+      <KeycloakUserProvider>
+        <App />
+      </KeycloakUserProvider>
     </React.StrictMode>
   );
 })
