@@ -44,7 +44,7 @@ export default function Header() {
                     ) : (
                         <button
                             onClick={() => KeycloakServices.getIn()}
-                            className="text-white font-medium hover:underline uppercase hover:text-red-600"
+                            className="text-white font-medium hover:underline uppercase hover:text-green-600"
                         >
                             Login
                         </button>
