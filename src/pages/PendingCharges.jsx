@@ -33,7 +33,7 @@ export default function PendingCharges() {
     };
 
     const totalRows = request.length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    const totalPages = Math.max(1, Math.ceil(totalRows / rowsPerPage));
     const startIdx = (currentPage - 1) * rowsPerPage;
     const endIdx = startIdx + rowsPerPage;
     const currentRows = request.slice(startIdx, endIdx);
@@ -73,7 +73,7 @@ export default function PendingCharges() {
                     entries
                 </label>
                 <span className="text-sm text-gray-600">
-                    Showing {startIdx + 1}-{Math.min(endIdx, totalRows)} of {totalRows} entries
+                    Showing {totalRows === 0 ? 0 : startIdx + 1}-{Math.min(endIdx, totalRows)} of {totalRows} entries
                 </span>
             </div>
             <div className="overflow-x-auto">
@@ -110,7 +110,7 @@ export default function PendingCharges() {
                 </tbody>
             </table>
             </div>
-            <div className="flex items-center mt-4">
+            <div className="flex items-center mt-4 text-sm">
                 <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1 || loading}

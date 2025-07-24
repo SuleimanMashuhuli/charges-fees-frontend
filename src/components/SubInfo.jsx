@@ -29,7 +29,7 @@ export default function Subinfo() {
     };
 
     return (
-        <div className="mx-20 my-10 mb-20">
+        <div className="mx-20 my-[48px] mb-10">
             <form onSubmit={handleSubmit}>
                 <table className="table-fixed w-full border border-gray-300 text-sm text-left text-gray-700">
                     <tbody>

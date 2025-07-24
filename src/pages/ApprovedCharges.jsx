@@ -102,7 +102,7 @@ export default function ApprovedCharges () {
                 </tbody>
             </table>
             </div>
-            <div className="flex items-center mt-4">
+            <div className="flex items-center mt-4 text-sm">
                 <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1 || loading}

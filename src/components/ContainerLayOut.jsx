@@ -13,7 +13,7 @@ export default function ContainerLayOut() {
         <div className="flex flex-col min-h-screen h-screen">
             <Header />
             <div className="flex-1 flex flex-col min-h-0 overflow-hidden px-2 sm:px-4 md:px-8 lg:px-24 py-4 md:py-6 w-full">
-                <div className="mt-4 md:mt-8 lg:mt-10">
+                <div className=" pl-24 pr-24 mt-4 md:mt-8 lg:mt-10">
                     <Subinfo />
                 </div>
                 <div className="flex-1 min-h-0 h-full w-full overflow-auto">
