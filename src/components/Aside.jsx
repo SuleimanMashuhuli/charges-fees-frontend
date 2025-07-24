@@ -11,10 +11,10 @@ export default function Aside() {
             </div>
 
             <div className="py-2 md:py-4 px-2 md:px-6 text-gray-700 flex flex-row md:flex-col gap-2 md:gap-0">
-                <Link to="pending" className="block p-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-300">
+                <Link to="pending" className="block p-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-400 hover:text-white">
                     Pending Charges
                 </Link>
-                <Link to="approved" className="block p-2 md:mt-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-300">
+                <Link to="approved" className="block p-2 md:mt-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-400 hover:text-white">
                     Approved Charges
                 </Link>
             </div>
@@ -23,7 +23,7 @@ export default function Aside() {
                 <a href="http://172.16.2.175/otrs/index.pl?Action=AgentFAQZoom;ItemID=10"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block p-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-300"
+                    className="block p-2 object-cover text-base font-semibold text-gray-900 hover:bg-gray-400 hover:text-white"
                 >
                     Help
                 </a>

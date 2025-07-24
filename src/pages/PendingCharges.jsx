@@ -80,12 +80,12 @@ export default function PendingCharges() {
             <table className="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th className="px-6 py-2">Channel ID</th>
-                        <th className="px-6 py-2">Currency</th>
-                        <th className="px-6 py-2">Amount</th>
-                        <th className="px-6 py-2">ABC Fee</th>
-                        <th className="px-6 py-2">Vendor Fee</th>
-                        <th className="px-6 py-2">Action</th>
+                        <th className="px-6 py-1">Channel ID</th>
+                        <th className="px-6 py-1">Currency</th>
+                        <th className="px-6 py-1">Amount</th>
+                        <th className="px-6 py-1">ABC Fee</th>
+                        <th className="px-6 py-1">Vendor Fee</th>
+                        <th className="px-6 py-1">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -95,12 +95,12 @@ export default function PendingCharges() {
                         <tr><td colSpan={6} className="text-center py-4">No pending charges found.</td></tr>
                     ) : currentRows.map((requests) => (
                         <tr className="bg-white border-b" key={requests.id}>
-                            <td className="px-6 py-2">{requests.channel_id}</td>
-                            <td className="px-6 py-2">{requests.currency}</td>
-                            <td className="px-6 py-2">{requests.max_amount}</td>
-                            <td className="px-6 py-2">{requests.abc_charge}</td>
-                            <td className="px-6 py-2">{requests.vendor_charge}</td>
-                            <td className="px-6 py-2">
+                            <td className="px-6 py-1">{requests.channel_id}</td>
+                            <td className="px-6 py-1">{requests.currency}</td>
+                            <td className="px-6 py-1">{requests.max_amount}</td>
+                            <td className="px-6 py-1">{requests.abc_charge}</td>
+                            <td className="px-6 py-1">{requests.vendor_charge}</td>
+                            <td className="px-6 py-1">
                                 <button onClick={() => handleViewCharges(requests.id)} className="text-[14px] px-2 font-normal text-white bg-[#C70039] rounded-md hover:bg-[#FF0000] focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out" disabled={loading}>
                                     Approve
                                 </button>

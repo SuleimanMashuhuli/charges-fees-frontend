@@ -74,12 +74,12 @@ export default function ApprovedCharges () {
             <table className="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th className="px-6 py-2">Channel ID</th>
-                        <th className="px-6 py-2">Currency</th>
-                        <th className="px-6 py-2">Amount</th>
-                        <th className="px-6 py-2">ABC Fee</th>
-                        <th className="px-6 py-2">Vendor Fee</th>
-                        <th className="px-6 py-2">Status</th>
+                        <th className="px-6 py-1">Channel ID</th>
+                        <th className="px-6 py-1">Currency</th>
+                        <th className="px-6 py-1">Amount</th>
+                        <th className="px-6 py-1">ABC Fee</th>
+                        <th className="px-6 py-1">Vendor Fee</th>
+                        <th className="px-6 py-1">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,12 +89,12 @@ export default function ApprovedCharges () {
                         <tr><td colSpan={6} className="text-center py-4">No approved charges found.</td></tr>
                     ) : currentRows.map((requests) => (
                         <tr className="bg-white border-b" key={requests.id}>
-                            <td className="px-6 py-2">{requests.channel_id}</td>
-                            <td className="px-6 py-2">{requests.currency}</td>
-                            <td className="px-6 py-2">{requests.max_amount}</td>
-                            <td className="px-6 py-2">{requests.abc_charge}</td>
-                            <td className="px-6 py-2">{requests.vendor_charge}</td>
-                            <td className="px-6 py-2">
+                            <td className="px-6 py-1">{requests.channel_id}</td>
+                            <td className="px-6 py-1">{requests.currency}</td>
+                            <td className="px-6 py-1">{requests.max_amount}</td>
+                            <td className="px-6 py-1">{requests.abc_charge}</td>
+                            <td className="px-6 py-1">{requests.vendor_charge}</td>
+                            <td className="px-6 py-1">
                                 <span className="inline-block px-2 py-1 text-xs font-semibold bg-green-100 text-green-800 rounded">Approved</span>
                             </td>
                         </tr>
