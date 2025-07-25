@@ -11,11 +11,11 @@ const initKeycloak = (onAuthenticated) => {
     kc.init({
         onLoad: 'login-required',
         silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
+        pkceMethod: 'S256'
     })
         .then((authenticated) => {
             if (authenticated) {
-                if (onAuthenticated)
-                    onAuthenticated();
+                onAuthenticated();
             } else {
                 console.log("Please Sign In again");
             }
@@ -37,8 +37,8 @@ const loggedUser = () => {
     return !!kc?.token;
 };
 
-const refreshToken = (successCallback) => {
-    return kc.updateToken(10)
+const updateToken = (successCallback) => {
+    return kc.updateToken(5)
         .then(successCallback)
         .catch(getIn);
 };
@@ -58,12 +58,12 @@ const hasRole = (role) => {
 const getOut = () => {
     return kc.logout();
 };
-const KeycloakServices = {
+const UserServices = {
     initKeycloak,
     getIn,
     getToken,
     loggedUser,
-    refreshToken,
+    updateToken,
     getName,
     getUsername,
     hasRole,
@@ -71,4 +71,4 @@ const KeycloakServices = {
 };
 
 
-export default KeycloakServices;
+export default UserServices;

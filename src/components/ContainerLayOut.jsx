@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Header from "./Header";
 import Subinfo from "./SubInfo";
 import AsideLayout from "./AsideLayout";
+import Welcome from "../pages/Welcome2";
 import PendingCharges from "../pages/PendingCharges";
 import ViewCharges from "../pages/ViewCharges";
 import ApprovedCharges from "../pages/ApprovedCharges";
@@ -19,6 +20,7 @@ export default function ContainerLayOut() {
                 <div className="flex-1 min-h-0 h-full w-full overflow-auto">
                     <Routes>
                         <Route path="/" element={<AsideLayout />} >
+                            <Route path="/*" element={<Welcome />} />
                             <Route index element={<Navigate to="pending" replace />} />
                             <Route path="pending" element={<PendingCharges />} />
                             <Route path="request/:id" element={<ViewCharges />} />

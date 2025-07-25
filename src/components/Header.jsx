@@ -1,10 +1,10 @@
 import React from "react";
-import KeycloakServices from "../services/Keycloak";
+import UserServices from "../services/UserService";
 
 export default function Header() {
-    const isAuthenticated = KeycloakServices.loggedUser();
-    const userName = KeycloakServices.getName();
-    const userUsername = KeycloakServices.getUsername();
+    const isAuthenticated = UserServices.loggedUser();
+    const userName = UserServices.getName();
+    const userUsername = UserServices.getUsername();
 
     return (
         <header className="fixed left-0 right-0 px-2 sm:px-8 md:px-20 lg:px-40 py-4 md:py-6 z-50 bg-[#2a3d8c] border-b border-gray-200 shadow-md flex flex-col md:flex-row justify-between items-start gap-2 md:gap-0">
@@ -37,7 +37,7 @@ export default function Header() {
                                 {userUsername || userName}
                             </span>
                             <button
-                                onClick={() => KeycloakServices.getOut()}
+                                onClick={() => UserServices.getOut()}
                                 className="text-white font-medium hover:underline uppercase hover:text-red-600"
                             >
                                 Logout
@@ -45,7 +45,7 @@ export default function Header() {
                         </div>
                     ) : (
                         <button
-                            onClick={() => KeycloakServices.getIn()}
+                            onClick={() => UserServices.getIn()}
                             className="text-white font-medium hover:underline uppercase hover:text-green-600"
                         >
                             Login

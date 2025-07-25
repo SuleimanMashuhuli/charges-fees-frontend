@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import KeycloakServices from './services/Keycloak';
+import HttpServices from './services/HttpService';
+// import UserServices from './services/UserService';
 // import KeycloakUserProvider from './context/KeycloakUserContext';
 
 
@@ -16,8 +17,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
       {/* </KeycloakUserProvider> */}
     </React.StrictMode>
   );
-// KeycloakServices.initKeycloak(() => {
+// UserServices.initKeycloak(() => {
   
 // })
 
+HttpServices.configure(); 
 reportWebVitals();
