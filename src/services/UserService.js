@@ -1,29 +1,30 @@
 import Keycloak from "keycloak-js";
 
-
 const kc = new Keycloak({
-    realm: "process.env.REACT_APP_REALM",
-    url: "process.env.REACT_APP_KEYCLOAK_SERVER",
-    clientId: "process.env.REACT_APP_CLIENT_ID"
-})
+  realm: process.env.REACT_APP_REALM,
+  url: process.env.REACT_APP_KEYCLOAK_SERVER,
+  clientId: process.env.REACT_APP_CLIENT_ID,
+});
 
 const initKeycloak = (onAuthenticated) => {
-    kc.init({
-        onLoad: 'login-required',
-        silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
-        pkceMethod: 'S256'
+  kc.init({
+    onLoad: 'login-required',
+    pkceMethod: 'S256',
+    silentCheckSsoRedirectUri: `${window.location.origin}/silent-check-sso.html`,
+    checkLoginIframe: false,
+  })
+    .then(authenticated => {
+      if (authenticated) {
+        onAuthenticated();
+      } else {
+        kc.login();
+      }
     })
-        .then((authenticated) => {
-            if (authenticated) {
-                onAuthenticated();
-            } else {
-                console.log("Please Sign In again");
-            }
-        })
-        .catch(error => {
-            console.error("Keycloak initialization error:", error);
-        });
+    .catch(error => {
+      console.error("Keycloak initialization error:", error);
+    });
 };
+
 
 const getIn = () => {
     return kc.login();
