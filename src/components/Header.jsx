@@ -28,14 +28,14 @@ export default function Header() {
             </div>
             <div>
                 <ul
-                    className="flex justify-between gap-5 flex-row">
+                    className="flex justify-between gap-1 flex-row">
                     {
                         UserServices.loggedUser() && (
                             <React.Fragment>
                                 <li className='px-2'>
                                     <a href="#user"
                                         className="py-2 pr-4 pl-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-300 md:p-0 :text-gray-400 md::hover:text-white :hover:bg-gray-700 :hover:text-white md::hover:bg-transparent">
-                                        {UserServices.getUsername()} Logged In
+                                        {UserServices.getUsername()} Signed in
                                     </a>
                                 </li>
                                 <li className='px-2'>
